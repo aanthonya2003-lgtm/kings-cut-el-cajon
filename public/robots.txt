@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kings-cut-el-cajon.vercel.app/sitemap.xml
