@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-dark: #0A0A0A;
+  --color-bg-light: #F5F0E8;
+  --color-bg-soft: #1A1A1A;
+  --color-accent: #C8A227;
+  --color-accent-soft: #D9B947;
+  --color-crimson: #8B1A1A;
+  --color-text-light: #F0EDE6;
+  --color-text-dark: #0D0D0D;
+  --color-muted: #888882;
+  --color-border: rgba(200, 162, 39, 0.2);
+
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", "JetBrains Mono", monospace;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+:root {
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  background: #0A0A0A;
+  color-scheme: dark;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+body {
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg-dark);
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.font-mono-ui {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-display {
+  font-size: clamp(3rem, 8vw, 8rem);
+}
+.text-h1 {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+}
+.text-h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+}
+.text-h3 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+.text-body-lg {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.6;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee-track-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+.marquee-track:hover,
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* Float idle animation */
+@keyframes float-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-idle {
+  animation: float-idle 6s ease-in-out infinite;
+}
+
+/* Hide scrollbars on marquee containers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom button styles */
+.btn-gold {
+  background: var(--color-accent);
+  color: var(--color-bg-dark);
+  transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+.btn-gold:hover {
+  background: var(--color-accent-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px -8px rgba(200, 162, 39, 0.45);
+}
+.btn-outline-gold {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  transition: all 0.4s var(--ease-out-expo);
+}
+.btn-outline-gold:hover {
+  background: var(--color-accent);
+  color: var(--color-bg-dark);
+  transform: translateY(-1px);
+}
+
+/* Section dividers */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 50%,
+    transparent 100%
+  );
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+}
+
+/* Disable hover transforms on touch devices */
+@media (hover: none) {
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* SplitText helper */
+.split-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Focus outline */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Image base */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Container utility */
+.container-edge {
+  width: 100%;
+  max-width: 1480px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Vignette utility (warm dark overlay) */
+.vignette {
+  position: relative;
+}
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
+}
+
+/* Cinematic letter spacing */
+.tracking-cine {
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* Hide overflow during slide reveals */
+.reveal-mask {
+  overflow: hidden;
+}
